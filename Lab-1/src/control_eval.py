@@ -1,9 +1,13 @@
 import numpy as np
 import pandas as pd
 import os
+import sys
 
-def main():
-    df_eval = pd.read_csv('../data/evaluation.csv', engine='python')
+def main(args):
+    df_eval = pd.read_csv('../data/evaluation_cleaning.csv', engine='python')
+
+    if len(args)==2:
+        df_eval = df_eval[df_eval.prediction==args[-1]]
 
     for index, row in df_eval.iterrows():
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -16,4 +20,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    args = sys.argv
+    main(args)
